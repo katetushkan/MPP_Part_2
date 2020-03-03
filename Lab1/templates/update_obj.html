@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% include "form.html" with button_label='Update' %}
+    <br>
+    <button id="delete" onclick=delete_conformation()>Delete</button>
+
+    <button onclick="window.location.href='/'">To main page</button>
+
+    <script>
+        function delete_conformation() {
+            if (confirm('Sure to delete {{ object.name }}?')) {
+                window.location.href = '/task/{{ object.id }}/delete'
+            }
+        }
+    </script>
+
+{% endblock %}

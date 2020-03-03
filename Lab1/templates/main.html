@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load manager_extras %}
+    <div class="mainForm">
+    {{ aaa }}
+    <table border="1" id="taskTable">
+        <thead>
+            <tr>
+                <th colspan="1">
+                    Task
+                </th>
+                <th colspan="1">
+                    Status
+                </th>
+                <th colspan="1">
+                    Deadline
+                </th>
+            </tr>
+        </thead>
+        {% for task in tasks %}
+            <tbody>
+                <tr>
+                    <td>
+                        <a href="/task/{{ task.id }}/edit">{{ task.name }}</a>
+                    </td>
+                    <td>
+                        {{ task.status|humanized }}
+                    </td>
+                    <td>
+                        {{ task.deadline }}
+                    </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+
+    <button class="mainButton" onclick="window.location.href='/task/create'">
+        Create task
+    </button>
+
+    <select id="trigger">
+        {% for status in choices %}
+            {% ifequal status.1 option%}
+                <option selected>{{ status.1 }}</option>
+            {% else %}
+                <option>{{ status.1 }}</option>
+            {% endifequal %}
+        {% endfor %}
+    </select>
+    <button onclick="make_get()">
+        AAAAAAA
+    </button>
+
+    </div>
+
+    <script>
+
+        function make_get() {
+            let dropbox = document.getElementById('trigger');
+            let filter = dropbox.value;
+            window.location.href = `/?option=${filter}`
+        }
+
+    </script>
+
+
+{% endblock %}
